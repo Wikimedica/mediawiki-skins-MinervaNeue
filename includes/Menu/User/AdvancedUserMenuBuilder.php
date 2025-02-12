@@ -73,7 +73,7 @@ final class AdvancedUserMenuBuilder implements IUserMenuBuilder {
 		];
 
 		foreach ( $personalTools as $key => $item ) {
-			if ( in_array( $key, [ 'preferences', 'betafeatures', 'uploads' ] ) ) {
+			if ( in_array( $key, [ 'betafeatures', 'uploads' ] ) ) {
 				continue;
 			}
 			// Special casing for userpage to support Extension:GrowthExperiments.

@@ -30,7 +30,7 @@ final class Group {
 	/**
 	 * @var IMenuEntry[]
 	 */
-	private $entries = [];
+	public $entries = [];
 
 	/**
 	 * @var string

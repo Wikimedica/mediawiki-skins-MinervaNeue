@@ -79,7 +79,33 @@ final class AdvancedMainMenuBuilder implements IMainMenuBuilder {
 	 * @inheritDoc
 	 */
 	public function getDiscoveryGroup( array $navigationTools ): Group {
-		return BuilderUtil::getDiscoveryTools( $this->definitions, $navigationTools );
+		$group = BuilderUtil::getDiscoveryTools( $this->definitions, $navigationTools );
+
+		unset($group->entries[1]);
+
+		// Done this way because unset does not free up index 1 and an error is later thrown.
+		$group->entries[1] = \MediaWiki\Minerva\Menu\Entries\SingleMenuEntry::create(
+			'about',
+			'À propos',
+			\Title::newFromText('À_propos', NS_PROJECT)->getLocalURL(),
+			'',
+		);
+
+		$group->insertEntry( \MediaWiki\Minerva\Menu\Entries\SingleMenuEntry::create(
+			'faq',
+			'FAQ',
+			\Title::newFromText('FAQ', NS_PROJECT)->getLocalURL(),
+			'',
+		));
+
+		$group->insertEntry( \MediaWiki\Minerva\Menu\Entries\SingleMenuEntry::create(
+			'management',
+			'Administration',
+			\Title::newFromText('Accueil', NS_PROJECT)->getLocalURL(),
+			'',
+		));
+
+		return $group;
 	}
 
 	/**
@@ -109,7 +135,23 @@ final class AdvancedMainMenuBuilder implements IMainMenuBuilder {
 
 		$this->definitions->insertRecentChanges( $group );
 		$this->definitions->insertSpecialPages( $group );
-		$this->definitions->insertCommunityPortal( $group );
+		//$this->definitions->insertCommunityPortal( $group );
+
+		$group->insertEntry( \MediaWiki\Minerva\Menu\Entries\SingleMenuEntry::create(
+			'contribuer',
+			'Contribuer',
+			\Title::newFromText('Contribuer', NS_PROJECT)->getLocalURL(),
+			'',
+			'userGroup'
+		));
+
+		$group->insertEntry( \MediaWiki\Minerva\Menu\Entries\SingleMenuEntry::create(
+			'help',
+			'Aide',
+			\Title::newFromText('Accueil', NS_HELP)->getLocalURL(),
+			'',
+			'userAvatar'
+		));
 
 		return $group;
 	}
