@@ -87,16 +87,10 @@ final class AdvancedMainMenuBuilder implements IMainMenuBuilder {
 		$group->entries[1] = \MediaWiki\Minerva\Menu\Entries\SingleMenuEntry::create(
 			'about',
 			'À propos',
-			\Title::newFromText('À_propos', NS_PROJECT)->getLocalURL(),
+			\Title::newFromText('À_propos', NS_MAIN)->getLocalURL(),
 			'',
 		);
 
-		$group->insertEntry( \MediaWiki\Minerva\Menu\Entries\SingleMenuEntry::create(
-			'faq',
-			'FAQ',
-			\Title::newFromText('FAQ', NS_PROJECT)->getLocalURL(),
-			'',
-		));
 
 		$group->insertEntry( \MediaWiki\Minerva\Menu\Entries\SingleMenuEntry::create(
 			'management',
@@ -134,13 +128,13 @@ final class AdvancedMainMenuBuilder implements IMainMenuBuilder {
 		$group = new Group( 'p-interaction' );
 
 		$this->definitions->insertRecentChanges( $group );
-		$this->definitions->insertSpecialPages( $group );
+		//$this->definitions->insertSpecialPages( $group );
 		//$this->definitions->insertCommunityPortal( $group );
 
 		$group->insertEntry( \MediaWiki\Minerva\Menu\Entries\SingleMenuEntry::create(
 			'contribuer',
 			'Contribuer',
-			\Title::newFromText('Contribuer', NS_PROJECT)->getLocalURL(),
+			\Title::newFromText('Contribuer')->getLocalURL(),
 			'',
 			'userGroup'
 		));
